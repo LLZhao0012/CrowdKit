@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="crowdos.crowdkit.generator.dao.TableDOMapper" >
+  <resultMap id="BaseResultMap" type="crowdos.crowdkit.generator.dataobject.TableDO" >
+    <id column="table_id" property="tableId" jdbcType="BIGINT" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="table_comment" property="tableComment" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="package_name" property="packageName" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="table_type" property="tableType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    table_id, table_name, table_comment, class_name, package_name, author, create_by, 
+    create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gen_table
+    where table_id = #{tableId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByTableName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from gen_table
+    where table_name = #{tableName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from gen_table
+    where table_id = #{tableId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="crowdos.crowdkit.generator.dataobject.TableDO" >
+    insert into gen_table (table_id, table_name, table_comment, 
+      class_name, package_name, author, 
+      create_by, create_time, update_by, 
+      update_time, table_type)
+    values (#{tableId,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, #{tableComment,jdbcType=VARCHAR}, 
+      #{className,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{tableType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertGenTable" parameterType="crowdos.crowdkit.generator.dataobject.TableDO" useGeneratedKeys="true" keyProperty="tableId">
+    insert into gen_table (table_id, table_name, table_comment,
+                           class_name, package_name, author,
+                           create_by, create_time, update_by,
+                           update_time, table_type)
+    values (#{tableId,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, #{tableComment,jdbcType=VARCHAR},
+            #{className,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+            #{updateTime,jdbcType=TIMESTAMP}, #{tableType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="crowdos.crowdkit.generator.dataobject.TableDO" >
+    insert into gen_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tableId != null" >
+        table_id,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="tableComment != null" >
+        table_comment,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="packageName != null" >
+        package_name,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="tableType != null" >
+        table_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tableId != null" >
+        #{tableId,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableComment != null" >
+        #{tableComment,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null" >
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableType != null" >
+        #{tableType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="crowdos.crowdkit.generator.dataobject.TableDO" >
+    update gen_table
+    <set >
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableComment != null" >
+        table_comment = #{tableComment,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null" >
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableType != null" >
+        table_type = #{tableType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where table_id = #{tableId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="crowdos.crowdkit.generator.dataobject.TableDO" >
+    update gen_table
+    set table_name = #{tableName,jdbcType=VARCHAR},
+      table_comment = #{tableComment,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      table_type = #{tableType, jdbcType=VARCHAR}
+    where table_id = #{tableId,jdbcType=BIGINT}
+  </update>
+
+  <update id="createTable">
+    ${sql}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from gen_table
+  </select>
+
+  <select id="selectDbTableListByAuthor" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from gen_table
+    where author = #{author, jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectDbTableListByNames" resultMap="BaseResultMap">
+    select table_name, table_comment, create_time, update_time from information_schema.tables
+    where table_name NOT LIKE 'qrtz_%' and table_name NOT LIKE 'gen_%' and table_schema = (select database())
+    and table_name in
+    <foreach collection="array" item="name" open="(" separator="," close=")">
+      #{name}
+    </foreach>
+  </select>
+
+  <delete id="deleteByTableName" parameterType="java.lang.String">
+    delete from gen_table
+    where table_name = #{tableId,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="deleteTable">
+    drop table if exists ${tableName}
+  </update>
+
+</mapper>
